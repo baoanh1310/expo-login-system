@@ -32,22 +32,31 @@ const { brand, darkLight } = Colors;
 const Signup = () => {
 
     const [hidePassword, setHidePassword] = useState(true);
+    const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
 
     return (
         <StyledContainer>
             <StatusBar style="dark" />
             <InnerContainer>
-                <PageLogo resizeMode="cover" source={require('./../assets/imgs/icebear.jpg')} />
                 <PageTitle>Icebear System</PageTitle>
                 <SubTitle>Account Signup</SubTitle>
 
                 <Formik
-                    initialValues={{email: '', password: ''}}
+                    initialValues={{fullName: '', email: '', password: '', confirmPassword: ''}}
                     onSubmit={(values) => {
                         console.log(values);
                     }}
                 >
                     {({handleChange, handleBlur, handleSubmit, values}) => (<StyledFormArea>
+                        <MyTextInput 
+                            label="Full Name"
+                            icon="person"
+                            placeholder="John Doe"
+                            placeholderTextColor={darkLight}
+                            onChangeText={handleChange('fullName')}
+                            onBlur={handleBlur('fullName')}
+                            value={values.fullName}
+                        />
                         <MyTextInput 
                             label="Email Address"
                             icon="mail"
@@ -71,15 +80,28 @@ const Signup = () => {
                             hidePassword={hidePassword}
                             setHidePassword={setHidePassword}
                         />
-                        <MsgBox>...</MsgBox>
+                        <MyTextInput 
+                            label="Confirm Password"
+                            icon="lock"
+                            placeholder="* * * * * * * *"
+                            placeholderTextColor={darkLight}
+                            onChangeText={handleChange('confirmPassword')}
+                            onBlur={handleBlur('confirmPassword')}
+                            value={values.confirmPassword}
+                            secureTextEntry={hideConfirmPassword}
+                            isConfirmPassword={true}
+                            hideConfirmPassword={hideConfirmPassword}
+                            setHideConfirmPassword={setHideConfirmPassword}
+                        />
                         <StyledButton onPress={handleSubmit}>
-                            <ButtonText>Login</ButtonText>
+                            <ButtonText>Signup</ButtonText>
                         </StyledButton>
+                        <Line />
                         <ExtraView>
-                            <ExtraText>Don't have an account already?</ExtraText>
+                            <ExtraText>Already have an account?</ExtraText>
                             <TextLink>
                                 <TextLinkContent>
-                                    Signup
+                                    Login
                                 </TextLinkContent>
                             </TextLink>
                         </ExtraView>
@@ -91,7 +113,7 @@ const Signup = () => {
     );
 };
 
-const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ...props}) => {
+const MyTextInput = ({label, icon, isPassword, isConfirmPassword, hidePassword, setHidePassword, hideConfirmPassword, setHideConfirmPassword, ...props}) => {
     return (
         <View>
             <LeftIcon>
@@ -99,9 +121,14 @@ const MyTextInput = ({label, icon, isPassword, hidePassword, setHidePassword, ..
             </LeftIcon>
             <StyledInputLabel>{label}</StyledInputLabel>
             <StyledTextInput {...props} />
-            {isPassword && (
+            {isPassword && !isConfirmPassword && (
                 <RightIcon onPress={() => setHidePassword(!hidePassword)}>
                     <Ionicons name={hidePassword ? 'md-eye-off' : 'md-eye'} size={30} color={darkLight} />
+                </RightIcon>
+            )}
+            {isConfirmPassword && !isPassword && (
+                <RightIcon onPress={() => setHideConfirmPassword(!hideConfirmPassword)}>
+                    <Ionicons name={hideConfirmPassword ? 'md-eye-off' : 'md-eye'} size={30} color={darkLight} />
                 </RightIcon>
             )}
         </View>

@@ -75,6 +75,7 @@ const Login = () => {
                         <StyledButton onPress={handleSubmit}>
                             <ButtonText>Login</ButtonText>
                         </StyledButton>
+                        <Line />
                         <ExtraView>
                             <ExtraText>Don't have an account already?</ExtraText>
                             <TextLink>
