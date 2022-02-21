@@ -37,7 +37,7 @@ const Login = () => {
         <StyledContainer>
             <StatusBar style="dark" />
             <InnerContainer>
-                <PageLogo resizeMode="cover" source={require('./../assets/imgs/icebear.jpg')} />
+                <PageLogo resizeMode="contain" source={require('./../assets/imgs/icebear_new.png')} />
                 <PageTitle>Icebear System</PageTitle>
                 <SubTitle>Account Login</SubTitle>
 
