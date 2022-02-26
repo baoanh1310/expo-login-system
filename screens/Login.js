@@ -27,6 +27,8 @@ import {
     Colors,
 } from '../components/styles';
 
+import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
+
 const { brand, darkLight } = Colors;
 
 const Login = () => {
@@ -34,61 +36,63 @@ const Login = () => {
     const [hidePassword, setHidePassword] = useState(true);
 
     return (
-        <StyledContainer>
-            <StatusBar style="dark" />
-            <InnerContainer>
-                <PageLogo resizeMode="contain" source={require('./../assets/imgs/icebear_new.png')} />
-                <PageTitle>Icebear System</PageTitle>
-                <SubTitle>Account Login</SubTitle>
+        <KeyboardAvoidingWrapper>
+            <StyledContainer>
+                <StatusBar style="dark" />
+                <InnerContainer>
+                    <PageLogo resizeMode="contain" source={require('./../assets/imgs/icebear_new.png')} />
+                    <PageTitle>Icebear System</PageTitle>
+                    <SubTitle>Account Login</SubTitle>
 
-                <Formik
-                    initialValues={{email: '', password: ''}}
-                    onSubmit={(values) => {
-                        console.log(values);
-                    }}
-                >
-                    {({handleChange, handleBlur, handleSubmit, values}) => (<StyledFormArea>
-                        <MyTextInput 
-                            label="Email Address"
-                            icon="mail"
-                            placeholder="abc@gmail.com"
-                            placeholderTextColor={darkLight}
-                            onChangeText={handleChange('email')}
-                            onBlur={handleBlur('email')}
-                            value={values.email}
-                            keyboardType="email-address"
-                        />
-                        <MyTextInput 
-                            label="Password"
-                            icon="lock"
-                            placeholder="* * * * * * * *"
-                            placeholderTextColor={darkLight}
-                            onChangeText={handleChange('password')}
-                            onBlur={handleBlur('password')}
-                            value={values.password}
-                            secureTextEntry={hidePassword}
-                            isPassword={true}
-                            hidePassword={hidePassword}
-                            setHidePassword={setHidePassword}
-                        />
-                        <MsgBox>...</MsgBox>
-                        <StyledButton onPress={handleSubmit}>
-                            <ButtonText>Login</ButtonText>
-                        </StyledButton>
-                        <Line />
-                        <ExtraView>
-                            <ExtraText>Don't have an account already?</ExtraText>
-                            <TextLink>
-                                <TextLinkContent>
-                                    Signup
-                                </TextLinkContent>
-                            </TextLink>
-                        </ExtraView>
-                    </StyledFormArea>)}
+                    <Formik
+                        initialValues={{email: '', password: ''}}
+                        onSubmit={(values) => {
+                            console.log(values);
+                        }}
+                    >
+                        {({handleChange, handleBlur, handleSubmit, values}) => (<StyledFormArea>
+                            <MyTextInput 
+                                label="Email Address"
+                                icon="mail"
+                                placeholder="abc@gmail.com"
+                                placeholderTextColor={darkLight}
+                                onChangeText={handleChange('email')}
+                                onBlur={handleBlur('email')}
+                                value={values.email}
+                                keyboardType="email-address"
+                            />
+                            <MyTextInput 
+                                label="Password"
+                                icon="lock"
+                                placeholder="* * * * * * * *"
+                                placeholderTextColor={darkLight}
+                                onChangeText={handleChange('password')}
+                                onBlur={handleBlur('password')}
+                                value={values.password}
+                                secureTextEntry={hidePassword}
+                                isPassword={true}
+                                hidePassword={hidePassword}
+                                setHidePassword={setHidePassword}
+                            />
+                            <MsgBox>...</MsgBox>
+                            <StyledButton onPress={handleSubmit}>
+                                <ButtonText>Login</ButtonText>
+                            </StyledButton>
+                            <Line />
+                            <ExtraView>
+                                <ExtraText>Don't have an account already?</ExtraText>
+                                <TextLink>
+                                    <TextLinkContent>
+                                        Signup
+                                    </TextLinkContent>
+                                </TextLink>
+                            </ExtraView>
+                        </StyledFormArea>)}
 
-                </Formik>
-            </InnerContainer>
-        </StyledContainer>
+                    </Formik>
+                </InnerContainer>
+            </StyledContainer>
+        </KeyboardAvoidingWrapper>
     );
 };
 
