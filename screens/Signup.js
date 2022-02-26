@@ -31,7 +31,7 @@ import KeyboardAvoidingWrapper from '../components/KeyboardAvoidingWrapper';
 
 const { brand, darkLight } = Colors;
 
-const Signup = () => {
+const Signup = ({ navigation }) => {
 
     const [hidePassword, setHidePassword] = useState(true);
     const [hideConfirmPassword, setHideConfirmPassword] = useState(true);
@@ -48,6 +48,7 @@ const Signup = () => {
                         initialValues={{fullName: '', email: '', password: '', confirmPassword: ''}}
                         onSubmit={(values) => {
                             console.log(values);
+                            navigation.navigate("Welcome");
                         }}
                     >
                         {({handleChange, handleBlur, handleSubmit, values}) => (<StyledFormArea>
@@ -102,7 +103,7 @@ const Signup = () => {
                             <Line />
                             <ExtraView>
                                 <ExtraText>Already have an account?</ExtraText>
-                                <TextLink>
+                                <TextLink onPress={() => navigation.navigate("Login")}>
                                     <TextLinkContent>
                                         Login
                                     </TextLinkContent>
